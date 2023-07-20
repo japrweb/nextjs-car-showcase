@@ -8,15 +8,8 @@ import { CustomFilterProps } from "@/types";
 import { updateSearchParams } from "@/utils";
 
 
-const CustomFilter = ({ title, options }: CustomFilterProps) => {
-  const router = useRouter();
+const CustomFilter = ({ title, options, setFilter }: CustomFilterProps) => {
   const [selected, setSelected] = useState(options[0]);
-
-  const handleUpdteParams = (e: { title: string, value: string }) => {
-    const newPathName = updateSearchParams(title, e.value.toLocaleLowerCase());
-
-    router.push(newPathName);
-  }
 
   return (
     <div className="w-fit inline-flex">
@@ -24,7 +17,7 @@ const CustomFilter = ({ title, options }: CustomFilterProps) => {
         value={selected}
         onChange={(e) => {
           setSelected(e);
-          handleUpdteParams(e);
+          setFilter(e.value);
         }}
       >
         <div className="relative w-fit z-10">
